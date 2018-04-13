@@ -11,14 +11,11 @@ class GameOfLife(Frame):
 
 	def __init__(self, parent):
 
-
-
 		self.size_y = 28
 
 		self.cell_buttons = []
 
 		self.generate_next = True
-
 
 
 		self.initialUI()
@@ -27,10 +24,7 @@ class GameOfLife(Frame):
 
 	def initialUI(self):	
 
-
-
 		self.parent.title("Game of Life")
-
 
 
 		# frame for title and line of instruction
@@ -47,16 +41,9 @@ class GameOfLife(Frame):
 
 		title.pack(side = TOP)
 
-
-
-
-
-
 		# tableau de boutons pour la config
 
 		self.build_grid()
-
-
 
 		# bouton pour lancer le jeu
 
@@ -73,8 +60,6 @@ class GameOfLife(Frame):
 
 
 	def build_grid(self):
-
-
 
 		# limites du tableau de boutons
 
@@ -104,8 +89,6 @@ class GameOfLife(Frame):
 
 	def simulate_game(self):
 
-
-
 		self.disable_buttons()
 
 		# la liste des boutons dont on peut changer l'etat et va sez stocker dans ma class l'etat de la cellule
@@ -129,29 +112,20 @@ class GameOfLife(Frame):
 
 					buttons_to_toggle.append(coord)
 
-
-
 		# mets a jour l'erat des cellules
 
 		for coord in buttons_to_toggle:
 
 			self.cell_toggle(self.cell_buttons[coord[0]][coord[1]])			
 
-
-
 		if self.generate_next:
 
 			self.after(100, self.simulate_game)
-
 		else:
-
 			self.enable_buttons()
 
-
-
+			
 	def disable_buttons(self):
-
-
 
 		if self.cell_buttons[1][1] != DISABLED:
 
@@ -162,7 +136,6 @@ class GameOfLife(Frame):
 					self.cell_buttons[i][j].configure(state = DISABLED)
 
 
-
 			self.reset_button.configure(state = NORMAL)
 
 			self.start_button.configure(state = DISABLED)
@@ -170,9 +143,7 @@ class GameOfLife(Frame):
 
 
 	def enable_buttons(self):
-
-		# bouton de reset
-
+	    # bouton de reset
 		for i in range(0, self.size_y + 2):
 
 			for j in range(0, self.size_x + 2):
@@ -181,15 +152,11 @@ class GameOfLife(Frame):
 
 				self.cell_buttons[i][j].configure(state = NORMAL)
 
-
-
 		self.reset_button.configure(state = DISABLED)
 
 		self.start_button.configure(state = NORMAL)
 
 		self.generate_next = True
-
-
 
 	def neighbor_count(self, x_coord, y_coord):
 
@@ -203,22 +170,16 @@ class GameOfLife(Frame):
 
 					count += 1
 
-
-
 		return count
 
-
-
+	
 	def cell_toggle(self, cell):
 
 		if cell['bg'] == "white":
 
 			cell['bg'] = "black"
-
 		else:
-
 			cell['bg'] = "white"
-
 
 
 	def reset_game(self):
@@ -227,12 +188,10 @@ class GameOfLife(Frame):
 
 
 
+if __name__ == '__main__':  #permet d'utiliser un module comme script sans avoir a l'importer dans la console
 
+	root = Tk()  #ouvre le fenetre principalede tkinter
 
-if __name__ == '__main__':
+	game = GameOfLife(root) #lance la fonction class
 
-	root = Tk()
-
-	game = GameOfLife(root)
-
-	root.mainloop()
+	root.mainloop()  #mets fin excution programme
